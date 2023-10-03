@@ -13,6 +13,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useGlobalContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
+import { styled } from '@mui/system';
 
 const theme = createTheme({
   palette: {
@@ -24,6 +25,16 @@ const theme = createTheme({
     },
   },
 });
+
+const BlogContainer = styled('section')(({ theme }) => ({
+  padding: '3.5rem',
+  [theme.breakpoints.up('sm')]: {
+    padding: '0 2.5rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    padding: '0 3rem',
+  },
+}));
 
 const Login = () => {
   const { login, message } = useGlobalContext();
@@ -49,88 +60,90 @@ const Login = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container
-        component="main"
-        maxWidth="xs"
-        sx={{ boxShadow: '0 0 10px rgba(0,0,0, 0.25)' }}
-      >
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            padding: '1.375rem 0',
-          }}
+      <BlogContainer>
+        <Container
+          component="main"
+          maxWidth="xs"
+          sx={{ boxShadow: '0 0 10px rgba(0,0,0, 0.25)' }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Login
-          </Typography>
+          <CssBaseline />
           <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
+            sx={{
+              marginTop: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              padding: '1.375rem 0',
+            }}
           >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-
-            <Typography
-              sx={{ color: 'red', fontSize: '0.8rem', textAlign: 'center' }}
-            >
-              {message?.login}
+            <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Login
             </Typography>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1 }}
+            >
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Sign In
+              </Button>
 
-            <Grid container>
-              <Grid item xs>
-                <Link href="/auth/reset-password" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
+              <Typography
+                sx={{ color: 'red', fontSize: '0.8rem', textAlign: 'center' }}
+              >
+                {message?.login}
+              </Typography>
 
-              <Grid item>
-                <Link href="/auth/signup" variant="body2">
-                  {"Don't have an account yet? Sign Up"}
-                </Link>
+              <Grid container>
+                <Grid item xs>
+                  <Link href="/auth/reset-password" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid>
+
+                <Grid item>
+                  <Link href="/auth/signup" variant="body2">
+                    {"Don't have an account yet? Sign Up"}
+                  </Link>
+                </Grid>
               </Grid>
-            </Grid>
+            </Box>
           </Box>
-        </Box>
-      </Container>
+        </Container>
+      </BlogContainer>
     </ThemeProvider>
   );
 };

@@ -15,6 +15,7 @@ import { useGlobalContext } from '../context/UserContext';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useEffect, useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { Avatar } from '@mui/material';
 
 const pages = [
   { path: '/', name: 'Home' },
@@ -24,22 +25,8 @@ const pages = [
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
-  const { user, logout } = useGlobalContext();
+  const { user, logout, loading } = useGlobalContext();
   const [navPages, setNavPages] = useState(pages);
-
-  // const theme = createTheme({
-  //   components: {
-  //     MuiPaper: {
-  //       styleOverrides: {
-  //         root: {
-  //           backgroundColor: 'rgba(83, 109, 254, 0.5)!important', // Teljesen átlátszó
-  //           backdropFilter: 'blur(10px)!important', // Elmosódott háttér
-  //           border: '1px solid rgba(255, 255, 255, 0.2)!important', // Alacsony kontrasztú szegély
-  //         },
-  //       },
-  //     },
-  //   },
-  // });
 
   const theme = createTheme({
     palette: {
@@ -62,18 +49,6 @@ function Navbar() {
     setAnchorElNav(null);
   };
 
-  // useEffect(() => {
-  //   if (user) {
-  //     setNavPages([
-  //       ...navPages,
-  //       { path: '/create', name: 'Create a Blog' },
-  //       { path: `/create/update/:id`, name: 'Update a Blog' },
-  //     ]);
-  //   } else {
-  //     setNavPages([...pages]);
-  //   }
-  // }, [user]);
-
   useEffect(() => {
     let newNavPages = [...pages];
     if (user) {
@@ -82,6 +57,12 @@ function Navbar() {
     }
     setNavPages(newNavPages);
   }, [user]);
+
+  console.log(user);
+
+  if (loading) {
+    return <div className="loading"></div>;
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -103,7 +84,7 @@ function Navbar() {
                 textDecoration: 'none',
               }}
             >
-              MUI<span className="navSpan">Blogs</span>
+              ECONO<span className="navSpan">Coder</span>
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -164,7 +145,7 @@ function Navbar() {
                 textDecoration: 'none',
               }}
             >
-              MUI<span className="navSpan">Blogs</span>
+              ECONO<span className="navSpan">Coder</span>
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {navPages.map((page) => (
@@ -179,10 +160,14 @@ function Navbar() {
               ))}
             </Box>
 
-            <Box sx={{ flexGrow: 0 }}>
+            {/* <Box sx={{ flexGrow: 0 }}>
               {user ? (
                 <>
-                  {user.displayName && (
+                  {user?.photoURL ? (
+                    <IconButton sx={{ p: 0 }}>
+                      <Avatar src={user.photoURL} alt={user.displayName} />
+                    </IconButton>
+                  ) : (
                     <IconButton sx={{ p: 0 }}>
                       <Typography
                         textAlign="center"
@@ -236,6 +221,57 @@ function Navbar() {
                       </Typography>
                     </Link>
                   </IconButton>
+                </>
+              )}
+            </Box> */}
+
+            <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
+              {user ? (
+                <>
+                  <Box sx={{ p: 0, display: 'flex', alignItems: 'center' }}>
+                    {user?.photoURL ? (
+                      <Avatar src={user.photoURL} alt={user.displayName} />
+                    ) : (
+                      <Typography
+                        textAlign="center"
+                        sx={{
+                          color: '#fff',
+                          padding: '0.625rem',
+                          fontWeight: 700,
+                        }}
+                      >
+                        {user.displayName}
+                      </Typography>
+                    )}
+                  </Box>
+                  <Box sx={{ p: 0, ml: 2 }}>
+                    <IconButton
+                      onClick={() => {
+                        navigate('/auth');
+                        logout();
+                      }}
+                      sx={{ color: '#fff' }}
+                    >
+                      <LogoutIcon />
+                    </IconButton>
+                  </Box>
+                </>
+              ) : (
+                <>
+                  <Box sx={{ p: 0 }}>
+                    <Link to="auth/">
+                      <Button sx={{ color: '#fff', fontWeight: 700 }}>
+                        Login
+                      </Button>
+                    </Link>
+                  </Box>
+                  <Box sx={{ p: 0, ml: 2 }}>
+                    <Link to="auth/signup">
+                      <Button sx={{ color: '#fff', fontWeight: 700 }}>
+                        Sign Up
+                      </Button>
+                    </Link>
+                  </Box>
                 </>
               )}
             </Box>

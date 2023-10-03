@@ -9,6 +9,7 @@ import {
   sendPasswordResetEmail,
 } from 'firebase/auth';
 import { auth } from '../firebase';
+import { uploadFile } from '../utils/uploadFile';
 
 export const UserContext = createContext();
 
@@ -33,11 +34,33 @@ export const UserProvider = ({ children }) => {
     }
   }
 
-  async function signup(email, password, displayName) {
+  // async function signup(email, password, displayName) {
+  //   try {
+  //     await createUserWithEmailAndPassword(auth, email, password);
+  //     await updateProfile(auth.currentUser, { displayName });
+  //     sendEmailLink(email);
+  //     setMessage({ ...message, signup: null });
+  //     return Promise.resolve();
+  //   } catch (error) {
+  //     console.log(error.message);
+  //     setMessage({ ...message, signup: error.message });
+  //     return Promise.reject(error);
+  //   }
+  // }
+
+  async function signup(email, password, displayName, file) {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      await updateProfile(auth.currentUser, { displayName });
+
+      const photoURL = await uploadFile(file);
+
+      await updateProfile(auth.currentUser, {
+        displayName,
+        photoURL,
+      });
+
       sendEmailLink(email);
+
       setMessage({ ...message, signup: null });
       return Promise.resolve();
     } catch (error) {
