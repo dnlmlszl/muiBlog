@@ -18,7 +18,7 @@ import { styled } from '@mui/system';
 const theme = createTheme({
   palette: {
     primary: {
-      main: 'rgba(83, 109, 254)', // például egy friss, modern zöld szín
+      main: '#4c6375', // például egy friss, modern zöld szín
     },
     secondary: {
       main: '#ff9800', // például egy friss, modern narancssárga szín
@@ -28,11 +28,12 @@ const theme = createTheme({
 
 const BlogContainer = styled('section')(({ theme }) => ({
   padding: '3.5rem',
+  marginBottom: '3.15rem',
   [theme.breakpoints.up('sm')]: {
-    padding: '0 2.5rem',
+    padding: '2.5 2.5rem',
   },
   [theme.breakpoints.up('md')]: {
-    padding: '0 3rem',
+    padding: '2 3rem',
   },
 }));
 
@@ -43,10 +44,7 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // console.log({
-    //   email: data.get('email'),
-    //   password: data.get('password'),
-    // });
+
     const email = data.get('email');
     const password = data.get('password');
     login(email, password)

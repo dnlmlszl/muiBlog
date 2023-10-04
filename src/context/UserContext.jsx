@@ -34,19 +34,6 @@ export const UserProvider = ({ children }) => {
     }
   }
 
-  // async function signup(email, password, displayName) {
-  //   try {
-  //     await createUserWithEmailAndPassword(auth, email, password);
-  //     await updateProfile(auth.currentUser, { displayName });
-  //     sendEmailLink(email);
-  //     setMessage({ ...message, signup: null });
-  //     return Promise.resolve();
-  //   } catch (error) {
-  //     console.log(error.message);
-  //     setMessage({ ...message, signup: error.message });
-  //     return Promise.reject(error);
-  //   }
-  // }
 
   async function signup(email, password, displayName, file) {
     try {

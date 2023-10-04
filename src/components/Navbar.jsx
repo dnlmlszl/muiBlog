@@ -6,16 +6,14 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-// import Avatar from '@mui/material/Avatar';
+import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-// import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../context/UserContext';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useEffect, useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { Avatar } from '@mui/material';
 
 const pages = [
   { path: '/', name: 'Home' },
@@ -31,7 +29,8 @@ function Navbar() {
   const theme = createTheme({
     palette: {
       primary: {
-        main: 'rgba(83, 109, 254)', // például egy friss, modern zöld szín
+        // main: 'rgba(83, 109, 254)', // például egy friss, modern zöld szín
+        main: '#4c6375;', // például egy friss, modern zöld szín
       },
       secondary: {
         main: '#ff9800', // például egy friss, modern narancssárga szín
@@ -57,8 +56,6 @@ function Navbar() {
     }
     setNavPages(newNavPages);
   }, [user]);
-
-  console.log(user);
 
   if (loading) {
     return <div className="loading"></div>;
@@ -149,81 +146,25 @@ function Navbar() {
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {navPages.map((page) => (
-                <Link to={page.path} key={page.name}>
+                <NavLink
+                  to={page.path}
+                  key={page.name}
+                  className={({ isActive }) => (isActive ? 'nav-links' : '')}
+                >
                   <Button
                     onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
+                    sx={{
+                      my: 2,
+                      color: 'white',
+                      display: 'block',
+                      ':hover': { color: '#a8aab3' },
+                    }}
                   >
                     {page.name}
                   </Button>
-                </Link>
+                </NavLink>
               ))}
             </Box>
-
-            {/* <Box sx={{ flexGrow: 0 }}>
-              {user ? (
-                <>
-                  {user?.photoURL ? (
-                    <IconButton sx={{ p: 0 }}>
-                      <Avatar src={user.photoURL} alt={user.displayName} />
-                    </IconButton>
-                  ) : (
-                    <IconButton sx={{ p: 0 }}>
-                      <Typography
-                        textAlign="center"
-                        sx={{
-                          color: '#fff',
-                          padding: '0.625rem',
-                          fontWeight: 700,
-                        }}
-                      >
-                        {user.displayName}
-                      </Typography>
-                    </IconButton>
-                  )}
-                  <IconButton
-                    onClick={() => {
-                      navigate('/auth');
-                      logout();
-                    }}
-                    sx={{ p: 0, color: '#fff' }}
-                  >
-                    <LogoutIcon />
-                  </IconButton>
-                </>
-              ) : (
-                <>
-                  <IconButton sx={{ p: 0 }}>
-                    <Link to="auth/">
-                      <Typography
-                        textAlign="center"
-                        sx={{
-                          color: '#fff',
-                          padding: '0.625rem',
-                          fontWeight: 700,
-                        }}
-                      >
-                        Login
-                      </Typography>
-                    </Link>
-                  </IconButton>
-                  <IconButton sx={{ p: 0 }}>
-                    <Link to="auth/signup">
-                      <Typography
-                        textAlign="center"
-                        sx={{
-                          color: '#fff',
-                          padding: '0.625rem',
-                          fontWeight: 700,
-                        }}
-                      >
-                        Sign Up
-                      </Typography>
-                    </Link>
-                  </IconButton>
-                </>
-              )}
-            </Box> */}
 
             <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
               {user ? (

@@ -1,15 +1,14 @@
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const Home = () => {
-  const navigate = useNavigate();
-
   return (
-    <>
+    <main className="main">
       <Navbar />
       <Outlet />
-      <footer>Footer</footer>
-    </>
+      <Footer />
+    </main>
   );
 };
 

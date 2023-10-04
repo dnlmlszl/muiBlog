@@ -1,16 +1,19 @@
 import { Form, FormGroup, Label } from 'reactstrap';
 import { useForm } from 'react-hook-form';
 import { useGlobalContext } from '../context/UserContext';
+import { useGlobalCatContext } from '../context/CategoryContext';
 import { createTheme, ThemeProvider } from '@mui/material';
 import Error from './Error';
 import { uploadFile } from '../utils/uploadFile';
 import { useState } from 'react';
 import { styled } from '@mui/system';
+import { addPost } from '../utils/crudUtils';
+import MyAlert from '../components/MyAlert';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: 'rgba(83, 109, 254)', // például egy friss, modern zöld szín
+      main: '#4c6375', // például egy friss, modern zöld szín
     },
     secondary: {
       main: '#ff9800', // például egy friss, modern narancssárga szín
@@ -21,24 +24,25 @@ const theme = createTheme({
 const BlogContainer = styled('section')(({ theme }) => ({
   padding: '3.5rem',
   [theme.breakpoints.up('sm')]: {
-    padding: '0 2.5rem',
+    padding: '2 2.5rem',
   },
   [theme.breakpoints.up('md')]: {
-    padding: '0 3rem',
+    padding: '3 3rem',
   },
 }));
 
 const Create = () => {
   const { user, loading, setLoading } = useGlobalContext();
+  const { categories } = useGlobalCatContext();
+
   const [photo, setPhoto] = useState(null);
+  const [uploaded, setUploaded] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  const categories = ['Running', 'Coding', 'Travelling', 'Economy'];
 
   if (loading) {
     return <div className="loading"></div>;
@@ -55,11 +59,25 @@ const Create = () => {
       const file = data.file[0];
       const photoUrl = await uploadFile(file);
       console.log(photoUrl);
+      //Órai munka
+      const newData = { ...data };
+      delete newData.file;
+      await addPost({
+        ...newData,
+        photoUrl,
+        author: user.displayName,
+        profilePic: user.photoURL,
+        userId: user.uid,
+      });
+      setUploaded(true);
+      // Órai munka
       setLoading(false);
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
+      setUploaded(false);
+      setPhoto(null);
     }
     e.target.reset();
   }
@@ -155,8 +173,14 @@ const Create = () => {
               className="btn btn-outline-primary"
             />
             {photo && (
-              <img src={photo} alt="thumbnail" className="img-thumbnail" />
+              <img
+                src={photo}
+                alt="thumbnail"
+                style={{ margin: '1rem 0' }}
+                className="img-thumbnail"
+              />
             )}
+            {uploaded && <MyAlert text="uploaded" />}
           </Form>
         </section>
       </BlogContainer>

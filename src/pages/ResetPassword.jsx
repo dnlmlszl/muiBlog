@@ -2,10 +2,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
@@ -18,7 +14,7 @@ import { styled } from '@mui/system';
 const theme = createTheme({
   palette: {
     primary: {
-      main: 'rgba(83, 109, 254)', // például egy friss, modern zöld szín
+      main: '#4c6375', // például egy friss, modern zöld szín
     },
     secondary: {
       main: '#ff9800', // például egy friss, modern narancssárga szín
@@ -28,6 +24,7 @@ const theme = createTheme({
 
 const BlogContainer = styled('section')(({ theme }) => ({
   padding: '3.5rem',
+  marginBottom: '19.25rem',
   [theme.breakpoints.up('sm')]: {
     padding: '0 2.5rem',
   },
@@ -90,20 +87,7 @@ const ResetPassword = () => {
                 autoComplete="email"
                 autoFocus
               />
-              {/* <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            /> */}
-              {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
+
               <Button
                 type="submit"
                 fullWidth
@@ -112,18 +96,6 @@ const ResetPassword = () => {
               >
                 Update password
               </Button>
-              {/* <Grid container>
-              <Grid item xs>
-                <Link href="/" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/signup" variant="body2">
-                  {"Already ? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid> */}
             </Box>
           </Box>
         </Container>
