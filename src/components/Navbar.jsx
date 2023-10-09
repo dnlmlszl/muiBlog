@@ -18,7 +18,6 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 const pages = [
   { path: '/', name: 'Home' },
   { path: '/about', name: 'About' },
-  { path: `/post/:id`, name: 'Detail' },
 ];
 
 function Navbar() {

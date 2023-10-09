@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getPostById } from '../utils/crudUtils';
 import { useEffect, useState } from 'react';
 import MarkdownIt from 'markdown-it';
@@ -11,12 +11,16 @@ import {
   Box,
   Typography,
   Avatar,
+  Button,
 } from '@mui/material';
+import { useGlobalContext } from '../context/UserContext';
 
 const Detail = () => {
   const [post, setPost] = useState(null);
   const { id } = useParams();
   const mdParser = new MarkdownIt();
+
+  const { user } = useGlobalContext();
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -110,6 +114,20 @@ const Detail = () => {
               }}
             />
           </Typography>
+          {user && (
+            <Link to={`/update/${post.id}`}>
+              <Button
+                sx={{
+                  background: '#4c6375',
+                  color: '#fff',
+                  margin: '1rem 0',
+                  ':hover': { background: '#7d99af' },
+                }}
+              >
+                Edit post
+              </Button>
+            </Link>
+          )}
         </CardContent>
       </Card>
       <Box sx={{ display: 'flex', alignItems: 'center' }}>

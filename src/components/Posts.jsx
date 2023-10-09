@@ -43,7 +43,6 @@ const Posts = ({ truncateDescription, selectedCategories }) => {
     return <p>Error: {error}</p>;
   }
 
-  console.log(posts);
   return (
     <Grid container spacing={3} sx={{ padding: '1rem 3rem' }}>
       <Typography

@@ -100,14 +100,7 @@ const SinglePost = ({ post, truncateDescription }) => {
               justifyContent: 'flex-start',
               gap: '3rem',
             }}
-          >
-            {/* <Typography variant="span" color="text.secondary">
-              {post.author}
-            </Typography>
-            <Typography variant="span" color="text.secondary">
-              {post.category}
-            </Typography> */}
-          </Box>
+          ></Box>
           <Link to={`/post/${post.id}`}>
             <Button
               sx={{
