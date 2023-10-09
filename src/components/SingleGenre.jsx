@@ -1,41 +1,46 @@
-import RadioButtonUnChecked from '@mui/icons-material/RadioButtonUnchecked';
-import Done from '@mui/icons-material/Done';
+import DoneIcon from '@mui/icons-material/Done';
+import CloseIcon from '@mui/icons-material/Close';
 import { Chip } from '@mui/material';
 import { useState } from 'react';
 
-export function SingleGenre({ id, name, setSelectedGenres, selectedGenres }) {
+export function SingleGenre({ name, setSelectedGenres, selectedGenres }) {
   const [selected, setSelected] = useState(false);
 
   function handleClick() {
     setSelected((sel) => !sel);
 
-    if (selectedGenres.indexOf(id) === -1) {
-      setSelectedGenres((set) => [...set, id]);
+    if (selectedGenres.indexOf(name) === -1) {
+      setSelectedGenres((set) => [...set, name]);
     } else {
-      setSelectedGenres(selectedGenres.filter((item) => item !== id));
+      setSelectedGenres(selectedGenres.filter((item) => item !== name));
     }
-
-    console.log(selectedGenres);
   }
 
   return (
     <Chip
       label={name}
       clickable
-      variant="outlined"
       sx={{
         margin: '0.75rem 0',
-        color: '#999',
-        width: 150, // Fix szélesség
-        overflow: 'hidden', // A túlcsorduló tartalom elrejtése
-        textOverflow: 'ellipsis', // A túlcsorduló szöveg "..."-ként való megjelenítése
-        whiteSpace: 'nowrap', // A szöveg ne tördelődjön új sorba
+        color: selected ? '#fff' : '#999',
+        backgroundColor: selected ? '#4c6375' : 'transparent',
+        border: `1px solid ${selected ? '#4caf50' : '#999'}`,
+        transition: 'all 0.3s ease-in-out',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-start',
+        width: 130,
+        '&:hover': {
+          backgroundColor: selected ? '#45a049' : '#eee',
+        },
+        '&:focus': {
+          boxShadow: `0 0 0 0.2rem ${
+            selected ? 'rgba(76, 175, 80, 0.5)' : 'rgba(153, 153, 153, 0.5)'
+          }`,
+        },
       }}
       onClick={handleClick}
-      icon={selected ? <Done /> : <RadioButtonUnChecked />}
+      icon={selected ? <DoneIcon color="#fff" /> : <CloseIcon />}
     />
   );
 }

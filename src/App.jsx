@@ -8,8 +8,7 @@ import AuthLayout from './pages/AuthLayout';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ResetPassword from './pages/ResetPassword';
-import EditLayout from './pages/EditLayout';
-import Create from './pages/Create';
+import Create from './pages/Create_v2';
 import Landing from './pages/Landing';
 
 function App() {
@@ -19,11 +18,9 @@ function App() {
         <Route path="/" element={<Home />}>
           <Route index element={<Landing />} />
           <Route path="about" element={<About />} />
-          <Route path="detail/:id" element={<Detail />} />
-          <Route path="create" element={<EditLayout />}>
-            <Route index element={<Create />} />
-            <Route path="update/:id" element={<AddEditBlog />} />
-          </Route>
+          <Route path="post/:id" element={<Detail />} />
+          <Route path="create" element={<Create />} />
+          <Route path="update/:id" element={<AddEditBlog />} />
           <Route path="auth" element={<AuthLayout />}>
             <Route index element={<Login />} />
             <Route path="signup" element={<Signup />} />

@@ -18,7 +18,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 const pages = [
   { path: '/', name: 'Home' },
   { path: '/about', name: 'About' },
-  { path: `/detail/:id`, name: 'Detail' },
+  { path: `/post/:id`, name: 'Detail' },
 ];
 
 function Navbar() {
@@ -29,11 +29,11 @@ function Navbar() {
   const theme = createTheme({
     palette: {
       primary: {
-        // main: 'rgba(83, 109, 254)', // például egy friss, modern zöld szín
-        main: '#4c6375;', // például egy friss, modern zöld szín
+        // main: 'rgba(83, 109, 254)',
+        main: '#4c6375;',
       },
       secondary: {
-        main: '#ff9800', // például egy friss, modern narancssárga szín
+        main: '#ff9800',
       },
     },
   });
@@ -52,7 +52,7 @@ function Navbar() {
     let newNavPages = [...pages];
     if (user) {
       newNavPages.push({ path: '/create', name: 'Create a Blog' });
-      newNavPages.push({ path: `/create/update/:id`, name: 'Update a Blog' });
+      newNavPages.push({ path: `/update/:id`, name: 'Update a Blog' });
     }
     setNavPages(newNavPages);
   }, [user]);

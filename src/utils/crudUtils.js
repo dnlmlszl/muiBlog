@@ -42,10 +42,11 @@ export async function readPosts(setPosts) {
 }
 
 // Get a single post
-export async function getPostById(db, postId) {
+export async function getPostById(postId) {
   try {
-    const docRef = doc(db, 'posts', postId);
+    const docRef = doc(db, 'posts', String(postId));
     const docSnap = await getDoc(docRef);
+
     if (docSnap.exists()) {
       return { id: docSnap.id, ...docSnap.data() };
     } else {

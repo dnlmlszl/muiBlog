@@ -1,11 +1,10 @@
-import { useState } from 'react';
 import { useGlobalCatContext } from '../context/CategoryContext';
 import { SingleGenre } from './SingleGenre';
-import Stack from '@mui/material/Stack';
 
-const Categories = () => {
+import Box from '@mui/material/Box';
+
+const Categories = ({ selectedCategories, setSelectedCategories }) => {
   const { categories } = useGlobalCatContext();
-  const [selectedCategories, setSelectedCategories] = useState([]);
 
   if (!categories || categories.length === 0) {
     return <p>Loading categories...</p>;
@@ -13,14 +12,15 @@ const Categories = () => {
 
   return (
     <>
-      <h4>Categories</h4>
-      <Stack
-        direction="column"
-        spacing={1}
+      <h3 className="cat-title">Categories</h3>
+      <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          padding: '1rem',
+          display: 'grid',
+          placeItems: 'center center',
+          gridTemplateColumns: '1fr 1fr',
+          padding: '1rem 0',
+          gap: '0.25rem',
+          marginLeft: '-1rem',
         }}
       >
         {categories.map((genre, index) => (
@@ -32,7 +32,7 @@ const Categories = () => {
             setSelectedGenres={setSelectedCategories}
           />
         ))}
-      </Stack>
+      </Box>
     </>
   );
 };

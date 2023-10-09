@@ -9,14 +9,16 @@ import { useState } from 'react';
 import { styled } from '@mui/system';
 import { addPost } from '../utils/crudUtils';
 import MyAlert from '../components/MyAlert';
+import MdEditor from 'react-markdown-editor-lite';
+import MarkdownIt from 'markdown-it';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#4c6375',
+      main: '#4c6375', // például egy friss, modern zöld szín
     },
     secondary: {
-      main: '#ff9800',
+      main: '#ff9800', // például egy friss, modern narancssárga szín
     },
   },
 });
@@ -37,6 +39,8 @@ const Create = () => {
 
   const [photo, setPhoto] = useState(null);
   const [uploaded, setUploaded] = useState(false);
+  const [description, setDescription] = useState('');
+  const mdParser = new MarkdownIt();
 
   const {
     register,
@@ -64,6 +68,7 @@ const Create = () => {
       delete newData.file;
       await addPost({
         ...newData,
+        description,
         photoUrl,
         author: user.displayName,
         profilePic: user.photoURL,
@@ -77,6 +82,7 @@ const Create = () => {
     } finally {
       setLoading(false);
       setUploaded(false);
+      setDescription('');
       setPhoto(null);
     }
     e.target.reset();
@@ -112,7 +118,7 @@ const Create = () => {
                 })}
               >
                 <option>--Select category--</option>
-                {categories.map((category) => (
+                {categories?.map((category) => (
                   <option key={category} value={category}>
                     {category}
                   </option>
@@ -123,13 +129,14 @@ const Create = () => {
 
             <FormGroup>
               <Label>Tell your story...</Label>
-              <textarea
-                className="form-control"
-                type="textarea"
-                rows="10"
-                cols="100"
-                {...register('description', { required: true })}
-              ></textarea>
+
+              <MdEditor
+                value={description}
+                style={{ height: '500px', margin: '1rem 0 6rem' }}
+                renderHTML={(text) => mdParser.render(text)}
+                readOnly={false}
+                onChange={({ text }) => setDescription(text)}
+              />
               {errors.description && <p>Please add some text</p>}
             </FormGroup>
 

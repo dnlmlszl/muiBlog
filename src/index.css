@@ -232,3 +232,13 @@ h6 {
   border-bottom: 2px solid goldenrod;
   background-color: rgba(255, 255, 255, 0.1);
 }
+
+.cat-title {
+  font-size: 1.25rem;
+  color: #4c6375;
+  margin: 2rem 0 1rem;
+}
+
+.card-container {
+  margin: 1rem 1rem 1rem 0;
+}
