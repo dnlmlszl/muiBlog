@@ -3,7 +3,7 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-content">
         <h3>
-          ECONO<span className="navSpan">Coder</span>
+          BEST<span className="navSpan">Blogs</span>
         </h3>
         <p>Providing quality services since 2021.</p>
         <ul className="socials">
@@ -13,20 +13,12 @@ const Footer = () => {
             </a>
           </li>
           <li>
-            <a
-              href="https://twitter.com/dn1el_lszl0"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href="https://twitter.com" target="_blank" rel="noreferrer">
               Twitter
             </a>
           </li>
           <li>
-            <a
-              href="https://www.linkedin.com/in/l%C3%A1szl%C3%B3-d%C3%A1niel-a39a956b/"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href="https://www.linkedin.com" target="_blank" rel="noreferrer">
               LinkedIn
             </a>
           </li>
@@ -38,7 +30,7 @@ const Footer = () => {
         </ul>
       </div>
       <div className="footer-bottom">
-        <p>&copy; 2023 ECONOCoder. All rights reserved.</p>
+        <p>&copy; 2024 BestBlogs. All rights reserved.</p>
       </div>
     </footer>
   );

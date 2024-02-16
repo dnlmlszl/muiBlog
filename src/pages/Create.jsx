@@ -23,11 +23,12 @@ const theme = createTheme({
 
 const BlogContainer = styled('section')(({ theme }) => ({
   padding: '3.5rem',
+
   [theme.breakpoints.up('sm')]: {
-    padding: '2 2.5rem',
+    padding: '2.5rem',
   },
   [theme.breakpoints.up('md')]: {
-    padding: '3 3rem',
+    padding: '3rem',
   },
 }));
 

@@ -1,5 +1,5 @@
-import { Link, useParams } from 'react-router-dom';
-import { getPostById } from '../utils/crudUtils';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { deletePost, getPostById } from '../utils/crudUtils';
 import { useEffect, useState } from 'react';
 import MarkdownIt from 'markdown-it';
 
@@ -21,6 +21,17 @@ const Detail = () => {
   const mdParser = new MarkdownIt();
 
   const { user } = useGlobalContext();
+
+  const navigate = useNavigate();
+
+  const handleDelete = async () => {
+    try {
+      await deletePost(id);
+      navigate('/');
+    } catch (error) {
+      console.error('Error deleting post: ', error);
+    }
+  };
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -115,18 +126,28 @@ const Detail = () => {
             />
           </Typography>
           {user && (
-            <Link to={`/update/${post.id}`}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Link to={`/update/${post.id}`}>
+                <Button
+                  sx={{
+                    background: '#4c6375',
+                    color: '#fff',
+                    margin: '1rem 0',
+                    ':hover': { background: '#7d99af' },
+                  }}
+                >
+                  Edit post
+                </Button>
+              </Link>
               <Button
-                sx={{
-                  background: '#4c6375',
-                  color: '#fff',
-                  margin: '1rem 0',
-                  ':hover': { background: '#7d99af' },
-                }}
+                onClick={handleDelete}
+                variant="outlined"
+                color="error"
+                sx={{ margin: '1rem 0' }}
               >
-                Edit post
+                Delete post
               </Button>
-            </Link>
+            </Box>
           )}
         </CardContent>
       </Card>

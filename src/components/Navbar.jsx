@@ -51,7 +51,6 @@ function Navbar() {
     let newNavPages = [...pages];
     if (user) {
       newNavPages.push({ path: '/create', name: 'Create a Blog' });
-      newNavPages.push({ path: `/update/:id`, name: 'Update a Blog' });
     }
     setNavPages(newNavPages);
   }, [user]);

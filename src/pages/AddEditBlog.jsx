@@ -6,7 +6,7 @@ import { getPostById, updatePost } from '../utils/crudUtils';
 import { createTheme } from '@mui/material';
 import { db } from '../firebase';
 import { styled } from '@mui/system';
-import { Form, FormGroup, Label } from 'reactstrap';
+import { Form, FormGroup } from 'reactstrap';
 
 const theme = createTheme({
   palette: {

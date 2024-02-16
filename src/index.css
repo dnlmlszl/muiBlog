@@ -68,8 +68,20 @@ a {
 }
 
 .blogContainer {
-  max-width: 768px;
-  margin: 0rem auto;
+  max-width: 976px;
+  margin: 2rem auto;
+  text-align: center;
+  border: 1px solid #ddd;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  padding: 2rem 3rem;
+  background-color: #fff;
+  color: #333;
+  border-radius: 0.75rem;
+}
+
+.blogContainer h3 {
+  margin-bottom: 0.5rem;
+  color: #4c6375;
 }
 
 .btn:hover {

@@ -1,8 +1,28 @@
-# React + Vite
+# BlogZ project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Insatllation
 
-Currently, two official plugins are available:
+To Instal project run
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```
+npm install or yarn
+```
+
+Setup firebase, firestore and user authentication
+
+### Firestore
+
+Collection: posts
+Fields: author, category, description, photoUrl, profilePic, title, userId, timestamp
+
+### Storage
+
+Setup uploads/ folder
+
+### Authentcation
+
+Setup as your choice, in this case please change the code to support necessary services.
+
+## Firebase deployment
+
+As always
