@@ -1,5 +1,6 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { deletePost, getPostById } from '../utils/crudUtils';
+import { db } from '../firebase';
 import { useEffect, useState } from 'react';
 import MarkdownIt from 'markdown-it';
 
@@ -26,7 +27,7 @@ const Detail = () => {
 
   const handleDelete = async () => {
     try {
-      await deletePost(id);
+      await deletePost(db, id);
       navigate('/');
     } catch (error) {
       console.error('Error deleting post: ', error);
