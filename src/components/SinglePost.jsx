@@ -8,32 +8,38 @@ import {
   Typography,
 } from '@mui/material';
 
-import { useGlobalContext } from '../context/UserContext';
+// import { useGlobalContext } from '../context/UserContext';
 import { Link } from 'react-router-dom';
 import MarkdownIt from 'markdown-it';
 
 const SinglePost = ({ post, truncateDescription }) => {
-  const { user } = useGlobalContext();
+  // const { user } = useGlobalContext();
   const mdParser = new MarkdownIt();
 
   function formatDate(timestamp) {
-    const date = timestamp.toDate(); // Konvertálás JavaScript Date objektummá
-    return date.toLocaleDateString(); // Formázás olvasható stringgé
+    const date = timestamp.toDate();
+    return date.toLocaleDateString();
   }
 
   return (
     <Grid item xs={12} md={12} key={post.id} sx={{ marginBottom: '2rem' }}>
-      <Card sx={{ display: 'flex', maxHeight: '40rem' }}>
+      <Card
+        sx={{
+          display: 'flex',
+          flexDirection: { xs: 'column', md: 'row' },
+          maxHeight: { xs: '100rem', md: '40rem' },
+        }}
+      >
         <CardMedia
           component="img"
-          sx={{ width: '40%', objectFit: 'cover' }}
+          sx={{ width: { xs: '100%', md: '40%' }, objectFit: 'cover' }}
           height="450"
           image={post.photoUrl}
           alt={post.title}
         />
         <CardContent
           sx={{
-            width: '60%',
+            width: { xs: '100%', md: '60%' },
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',

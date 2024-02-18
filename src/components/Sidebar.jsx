@@ -7,7 +7,7 @@ const Sidebar = ({
   setSelectedCategories,
 }) => {
   return (
-    <aside>
+    <aside style={{ padding: '1rem' }}>
       <Categories
         selectedCategories={selectedCategories}
         setSelectedCategories={setSelectedCategories}

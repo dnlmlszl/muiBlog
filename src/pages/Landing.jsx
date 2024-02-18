@@ -27,7 +27,7 @@ const Landing = () => {
   }
   return (
     <Grid container spacing={3} className="main">
-      <Grid item xs={9}>
+      <Grid item xs={12} lg={9}>
         <Posts
           truncateDescription={truncateDescription}
           selectedCategories={selectedCategories}
@@ -36,7 +36,8 @@ const Landing = () => {
       </Grid>
       <Grid
         item
-        xs={3}
+        xs={12}
+        lg={3}
         sx={{ borderLeft: '2px solid rgba(75, 97, 114, 0.25)' }}
       >
         <Sidebar
