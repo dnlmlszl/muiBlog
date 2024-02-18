@@ -79,7 +79,7 @@ function Navbar() {
                 textDecoration: 'none',
               }}
             >
-              BEST<span className="navSpan">Coder</span>
+              BEST<span className="navSpan">Blogs</span>
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -140,7 +140,7 @@ function Navbar() {
                 textDecoration: 'none',
               }}
             >
-              ECONO<span className="navSpan">Coder</span>
+              BEST<span className="navSpan">Blogs</span>
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {navPages.map((page) => (
