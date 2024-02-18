@@ -79,7 +79,7 @@ function Navbar() {
                 textDecoration: 'none',
               }}
             >
-              ECONO<span className="navSpan">Coder</span>
+              BEST<span className="navSpan">Coder</span>
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
